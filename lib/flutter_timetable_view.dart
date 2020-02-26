@@ -1,7 +1,7 @@
 library flutter_timetable_view;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/models/lane.dart';
+export 'src/models/lane_events.dart';
+export 'src/models/table_event.dart';
+export 'src/models/table_event_time.dart';
+export 'src/views/timetable_view.dart';
