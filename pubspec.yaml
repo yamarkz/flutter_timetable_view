@@ -1,8 +1,8 @@
 name: flutter_timetable_view
-description: Simple Timetable UI
+description: Timetable Widget Package for for Flutter
 version: 0.0.1
-author:
-homepage:
+author: Kazuki Yamaguchi <y.kazuki0614n@gmail.com>
+homepage: https://github.com/yamarkz
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

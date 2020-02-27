@@ -1,5 +1,6 @@
 class TableEventTime extends DateTime {
   final int hour;
+
   final int minute;
 
   TableEventTime({
