@@ -10,7 +10,7 @@ Timetable Widget Package for for Flutter
 
 ## Video Recording
 
-<img src="art/video_1.gif" height="440" />  <img src="art/video_2" height="440" />
+<img src="art/video_1.gif" height="440" />  <img src="art/video_2.gif" height="440" />
 
 # Install
 
