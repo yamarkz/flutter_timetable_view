@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  flutter_timetable_view: ^0.0.1
 
 dev_dependencies:
   flutter_test:
