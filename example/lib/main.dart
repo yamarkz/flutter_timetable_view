@@ -41,13 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
         events: [
           TableEvent(
             title: 'An event 1',
-            description: 'A description 1',
             start: TableEventTime(hour: 8, minute: 0),
             end: TableEventTime(hour: 10, minute: 0),
           ),
           TableEvent(
             title: 'An event 2',
-            description: 'A description 2',
             start: TableEventTime(hour: 12, minute: 0),
             end: TableEventTime(hour: 13, minute: 20),
           ),
@@ -58,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
         events: [
           TableEvent(
             title: 'An event 3',
-            description: 'A description 3',
             start: TableEventTime(hour: 10, minute: 10),
             end: TableEventTime(hour: 11, minute: 45),
           ),
