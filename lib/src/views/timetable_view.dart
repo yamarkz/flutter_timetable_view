@@ -31,22 +31,13 @@ class _TimetableViewState extends State<TimetableView>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: _buildBody(context),
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return SafeArea(
-      child: Stack(
-        children: <Widget>[
-          _buildCorner(),
-          _buildMainContent(context),
-          _buildTimelineList(context),
-          _buildLaneList(context),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        _buildCorner(),
+        _buildMainContent(context),
+        _buildTimelineList(context),
+        _buildLaneList(context),
+      ],
     );
   }
 
