@@ -1,6 +1,6 @@
 # Flutter Timetable View
 
-Timetable Widget Package for for Flutter
+Timetable Widget Package for Flutter
 
 # Features
 
