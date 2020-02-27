@@ -2,18 +2,52 @@
 
 Timetable Widget Package for for Flutter
 
+# Features
+
+## Image
+
+<img src="art/app_image_1.png" width="200" />
+
+## Video Recording
+
+<img src="art/video_1.gif" height="440" />  <img src="art/video_2" height="440" />
+
 # Install
 
-wip
+https://pub.dev/packages/flutter_timetable_view#install
 
 # Usage
-
-wip
 
 ## Basic
 
 ```
-todo
+import 'package:flutter_timetable_view/flutter_timetable_view.dart';
+
+class MyHomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: TimetableView(
+        laneEventsList: [
+          LaneEvents(
+            lane: Lane(
+              name: 'Track A',
+            ),
+            events: [
+              TableEvent(
+                title: 'An event 1',
+                description: 'An event 1',
+                start: TableEventTime(hour: 10, minute: 0),
+                end: TableEventTime(hour: 11, minute: 20),
+              ),
+            ]
+          ),
+        ],
+      ),
+    );
+  }
+}
 ```
 
 ## Customized
