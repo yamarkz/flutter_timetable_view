@@ -1,3 +1,7 @@
+## [0.0.3] - 2020-02-28
+
+* Remove description field
+
 ## [0.0.2] - 2020-02-27
 
 * Add customize style file
