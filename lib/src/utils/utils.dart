@@ -50,9 +50,6 @@ class Utils {
             Utils.hourFormatter(event.end.hour, event.end.minute) +
             '\n\n',
       ),
-      TextSpan(
-        text: event.description,
-      ),
     ];
 
     bool exceedHeight;
