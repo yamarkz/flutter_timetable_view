@@ -1,4 +1,4 @@
-# Flutter Timetable View
+# [wip] Flutter Timetable View
 
 Timetable Widget Package for Flutter
 
