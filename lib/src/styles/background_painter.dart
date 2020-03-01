@@ -32,5 +32,5 @@ class BackgroundPainter extends CustomPainter {
             oldDayViewBackgroundPainter.timetableStyle.timelineBorderColor);
   }
 
-  static double calculateTopOffset(int hour) => hour * 60.0;
+  double calculateTopOffset(int hour) => hour * timetableStyle.timeItemHeight;
 }
