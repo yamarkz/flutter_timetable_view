@@ -20,7 +20,7 @@ mixin TimetableViewController {
     verticalScrollController.addListener(verticalScrollListener);
   }
 
-  void dispose() {
+  void disposeController() {
     _horizontalPixelsStream.close();
     _verticalPixelsStream.close();
   }
