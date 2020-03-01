@@ -37,7 +37,6 @@ class MyHomePage extends StatelessWidget {
             events: [
               TableEvent(
                 title: 'An event 1',
-                description: 'An event 1',
                 start: TableEventTime(hour: 10, minute: 0),
                 end: TableEventTime(hour: 11, minute: 20),
               ),
