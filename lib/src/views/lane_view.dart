@@ -27,8 +27,7 @@ class LaneView extends StatelessWidget {
             Positioned.fill(
               child: CustomPaint(
                 painter: BackgroundPainter(
-                  backgroundColor: timetableStyle.mainBackgroundColor,
-                  rulesColor: timetableStyle.timelineBorderColor,
+                  timetableStyle: timetableStyle,
                 ),
               ),
             )
