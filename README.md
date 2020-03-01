@@ -1,4 +1,4 @@
-# [wip] Flutter Timetable View
+# Flutter Timetable View
 
 Timetable Widget Package for Flutter
 
@@ -6,15 +6,15 @@ Timetable Widget Package for Flutter
 
 ## Image
 
-<img src="art/app_image_1.png" width="200" />
+<img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/app_image_1.png" width="200" />
 
 ## Video Recording
 
-<img src="art/video_1.gif" height="440" />  <img src="art/video_2.gif" height="440" />
+<img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/video_1.gif" height="440" />  <img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/video_2.gif" height="440" />
 
 # Install
 
-https://pub.dev/packages/flutter_timetable_view#install
+https://pub.dev/packages/flutter_timetable_view#-installing-tab-
 
 # Usage
 

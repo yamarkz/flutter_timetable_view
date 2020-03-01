@@ -1,3 +1,7 @@
+## [0.0.4] - 2020-03-01
+
+* Refactoring code
+
 ## [0.0.3] - 2020-02-28
 
 * Remove description field
