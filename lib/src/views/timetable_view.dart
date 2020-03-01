@@ -30,6 +30,12 @@ class _TimetableViewState extends State<TimetableView>
   }
 
   @override
+  void dispose() {
+    disposeController();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[

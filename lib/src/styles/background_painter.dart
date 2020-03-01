@@ -1,41 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 
 class BackgroundPainter extends CustomPainter {
-  final Color backgroundColor;
-
-  final Color rulesColor;
+  final TimetableStyle timetableStyle;
 
   BackgroundPainter({
-    this.backgroundColor,
-    this.rulesColor,
-  });
+    this.timetableStyle,
+  }) : assert(timetableStyle != null);
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (backgroundColor != null) {
-      canvas.drawRect(
-        Rect.fromLTWH(0, 0, size.width, size.height),
-        Paint()..color = backgroundColor,
+    canvas.drawRect(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      Paint()..color = timetableStyle.mainBackgroundColor,
+    );
+    for (int hour = 1; hour < 24; hour++) {
+      double topOffset = calculateTopOffset(hour);
+      canvas.drawLine(
+        Offset(0, topOffset),
+        Offset(size.width, topOffset),
+        Paint()..color = timetableStyle.timelineBorderColor,
       );
-    }
-
-    if (rulesColor != null) {
-      for (int hour = 1; hour < 24; hour++) {
-        double topOffset = topOffsetCalculator(hour);
-        canvas.drawLine(
-          Offset(0, topOffset),
-          Offset(size.width, topOffset),
-          Paint()..color = rulesColor,
-        );
-      }
     }
   }
 
   @override
   bool shouldRepaint(BackgroundPainter oldDayViewBackgroundPainter) {
-    return backgroundColor != oldDayViewBackgroundPainter.backgroundColor ||
-        rulesColor != oldDayViewBackgroundPainter.rulesColor;
+    return (timetableStyle.mainBackgroundColor !=
+            oldDayViewBackgroundPainter.timetableStyle.mainBackgroundColor ||
+        timetableStyle.timelineBorderColor !=
+            oldDayViewBackgroundPainter.timetableStyle.timelineBorderColor);
   }
 
-  static double topOffsetCalculator(int hour) => hour * 60.0;
+  double calculateTopOffset(int hour) => hour * timetableStyle.timeItemHeight;
 }
