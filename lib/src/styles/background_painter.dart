@@ -15,7 +15,7 @@ class BackgroundPainter extends CustomPainter {
       Paint()..color = timetableStyle.mainBackgroundColor,
     );
     for (int hour = 1; hour < 24; hour++) {
-      double topOffset = topOffsetCalculator(hour);
+      double topOffset = calculateTopOffset(hour);
       canvas.drawLine(
         Offset(0, topOffset),
         Offset(size.width, topOffset),
@@ -32,5 +32,5 @@ class BackgroundPainter extends CustomPainter {
             oldDayViewBackgroundPainter.timetableStyle.timelineBorderColor);
   }
 
-  static double topOffsetCalculator(int hour) => hour * 60.0;
+  static double calculateTopOffset(int hour) => hour * 60.0;
 }
