@@ -6,11 +6,11 @@ Timetable Widget Package for Flutter
 
 ## Image
 
-<img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/app_image_1.png" width="200" />
+<img src="https://user-images.githubusercontent.com/12509392/75619419-dc877480-5bbe-11ea-88a3-330e0a03154e.png" width="200" />
 
 ## Video Recording
 
-<img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/video_1.gif" height="440" />  <img src="https://github.com/yamarkz/flutter_timetable_view/blob/master/art/video_2.gif" height="440" />
+<img src="https://user-images.githubusercontent.com/12509392/75619433-f0cb7180-5bbe-11ea-8644-11d7277b2e29.gif" height="440" />  <img src="https://user-images.githubusercontent.com/12509392/75619441-0476d800-5bbf-11ea-854b-4e9ec653f551.gif" height="440" />
 
 # Install
 
@@ -55,6 +55,10 @@ class MyHomePage extends StatelessWidget {
 ```
 todo
 ```
+
+# Info
+
+Use case is [here](https://github.com/yamarkz/unofficial_conference_app_2020)
 
 # Contributing
 
