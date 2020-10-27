@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
@@ -27,31 +26,26 @@ class EventView extends StatelessWidget {
       width: timetableStyle.laneWidth,
       child: GestureDetector(
         onTap: event.onTap,
-        child: DottedBorder(
-          color: Colors.grey,
-          strokeWidth: 0,
-          dashPattern: [3],
-          child: Container(
-            decoration: event.decoration ??
-                (event.backgroundColor != null
-                    ? BoxDecoration(color: event.backgroundColor)
-                    : null),
-            margin: event.margin,
-            padding: event.padding,
-            child: (Utils.eventText)(
-              event,
-              context,
-              math.max(
-                  0.0,
-                  height() -
-                      (event.padding?.top ?? 0.0) -
-                      (event.padding?.bottom ?? 0.0)),
-              math.max(
-                  0.0,
-                  timetableStyle.laneWidth -
-                      (event.padding?.left ?? 0.0) -
-                      (event.padding?.right ?? 0.0)),
-            ),
+        child: Container(
+          decoration: event.decoration ??
+              (event.backgroundColor != null
+                  ? BoxDecoration(color: event.backgroundColor)
+                  : null),
+          margin: event.margin,
+          padding: event.padding,
+          child: (Utils.eventText)(
+            event,
+            context,
+            math.max(
+                0.0,
+                height() -
+                    (event.padding?.top ?? 0.0) -
+                    (event.padding?.bottom ?? 0.0)),
+            math.max(
+                0.0,
+                timetableStyle.laneWidth -
+                    (event.padding?.left ?? 0.0) -
+                    (event.padding?.right ?? 0.0)),
           ),
         ),
       ),
