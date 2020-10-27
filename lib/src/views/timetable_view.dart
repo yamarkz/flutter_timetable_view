@@ -112,6 +112,7 @@ class _TimetableViewState extends State<TimetableView>
             color: Colors.grey,
             strokeWidth: 0,
             dashPattern: [3],
+            padding: EdgeInsets.all(0),
             child: Container(
               height: widget.timetableStyle.timeItemHeight,
               decoration: BoxDecoration(
