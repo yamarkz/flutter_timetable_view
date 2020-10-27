@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/lane_events.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
@@ -107,21 +108,27 @@ class _TimetableViewState extends State<TimetableView>
               i += 1)
             i
         ].map((hour) {
-          return Container(
-            height: widget.timetableStyle.timeItemHeight,
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: widget.timetableStyle.timelineBorderColor,
-                  width: 0,
+          return DottedBorder(
+            color: Colors.grey,
+            strokeWidth: 1,
+            dashPattern: [2],
+            child: Container(
+              height: widget.timetableStyle.timeItemHeight,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: widget.timetableStyle.timelineBorderColor,
+                    width: 0,
+                  ),
                 ),
+                color: widget.timetableStyle.timelineItemColor,
               ),
-              color: widget.timetableStyle.timelineItemColor,
-            ),
-            child: Text(
-              Utils.hourFormatter(hour, 0),
-              style: TextStyle(color: widget.timetableStyle.timeItemTextColor),
-              textAlign: TextAlign.center,
+              child: Text(
+                Utils.hourFormatter(hour, 0),
+                style:
+                    TextStyle(color: widget.timetableStyle.timeItemTextColor),
+                textAlign: TextAlign.center,
+              ),
             ),
           );
         }).toList(),
