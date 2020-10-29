@@ -44,7 +44,7 @@ class Utils {
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       TextSpan(
-        text: ' ' +
+        text: '' +
             Utils.hourFormatter(event.start.hour, event.start.minute) +
             ' - ' +
             Utils.hourFormatter(event.end.hour, event.end.minute) +
