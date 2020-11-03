@@ -165,6 +165,12 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onScaleStart: _handleScaleStart,

@@ -14,13 +14,34 @@ class BackgroundPainter extends CustomPainter {
       Rect.fromLTWH(0, 0, size.width, size.height),
       Paint()..color = timetableStyle.mainBackgroundColor,
     );
-    for (int hour = 1; hour < 24; hour++) {
-      double topOffset = calculateTopOffset(hour);
-      canvas.drawLine(
-        Offset(0, topOffset),
-        Offset(size.width, topOffset),
-        Paint()..color = timetableStyle.timelineBorderColor,
-      );
+    if (timetableStyle.visibleTimeBorder) {
+      for (int hour = 1; hour < 24; hour++) {
+        double topOffset = calculateTopOffset(hour);
+        canvas.drawLine(
+          Offset(0, topOffset),
+          Offset(size.width, topOffset),
+          Paint()..color = timetableStyle.timelineBorderColor,
+        );
+      }
+    }
+
+    if (timetableStyle.visibleDecorationBorder) {
+      final drawLimit = size.height / timetableStyle.decorationLineHeight;
+      for (double count = 0; count < drawLimit; count += 1) {
+        double topOffset = calculateDecorationLineOffset(count);
+        final paint = Paint()..color = timetableStyle.decorationLineBorderColor;
+        final dashWidth = timetableStyle.decorationLineDashWidth;
+        final dashSpace = timetableStyle.decorationLineDashSpaceWidth;
+        var startX = 0.0;
+        while (startX < size.width) {
+          canvas.drawLine(
+            Offset(startX, topOffset),
+            Offset(startX + timetableStyle.decorationLineDashWidth, topOffset),
+            paint,
+          );
+          startX += dashWidth + dashSpace;
+        }
+      }
     }
   }
 
@@ -33,4 +54,7 @@ class BackgroundPainter extends CustomPainter {
   }
 
   double calculateTopOffset(int hour) => hour * timetableStyle.timeItemHeight;
+
+  double calculateDecorationLineOffset(double count) =>
+      count * timetableStyle.decorationLineHeight;
 }
