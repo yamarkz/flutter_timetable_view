@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Timetabel View Demo',
+      title: 'Flutter TimeTable View Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: MyHomePage(),
     );
