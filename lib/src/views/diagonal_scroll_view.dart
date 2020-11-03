@@ -148,7 +148,7 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(vsync: this)
+    _controller = AnimationController(value: this)
       ..addListener(_handleFlingAnimation);
 
     widget.horizontalPixelsStreamController.stream.listen((pixels) {
