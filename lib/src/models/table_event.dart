@@ -20,8 +20,11 @@ class TableEvent {
 
   final TextStyle textStyle;
 
+  final String description;
+
   TableEvent({
     @required this.title,
+    @required this.description,
     @required this.start,
     @required this.end,
     this.padding: const EdgeInsets.all(10),
