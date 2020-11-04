@@ -113,12 +113,6 @@ class _TimetableViewState extends State<TimetableView>
           return Stack(
             alignment: Alignment.topCenter,
             children: [
-               Container(
-                height: widget.timetableStyle.timeItemHeight+5,
-                decoration: BoxDecoration(
-                  color: widget.timetableStyle.timelineItemColor,
-                ),
-              ),
               Container(
                 height: widget.timetableStyle.timeItemHeight,
                 decoration: BoxDecoration(
