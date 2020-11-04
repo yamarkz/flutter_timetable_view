@@ -120,7 +120,8 @@ class _TimetableViewState extends State<TimetableView>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+                padding: EdgeInsets.only(
+                    bottom: widget.timetableStyle.timeItemHeight),
                 child: Text(
                   Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
                               .substring(0, 2)[0] ==
