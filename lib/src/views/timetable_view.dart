@@ -58,9 +58,6 @@ class _TimetableViewState extends State<TimetableView>
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: widget.timetableStyle.cornerColor,
-            border: Border.all(
-              color: Colors.grey[300],
-            ),
           ),
         ),
       ),
