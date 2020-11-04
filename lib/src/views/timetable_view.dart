@@ -113,36 +113,39 @@ class _TimetableViewState extends State<TimetableView>
           return Stack(
             alignment: Alignment.topCenter,
             children: [
-              Container(
-                height: widget.timetableStyle.timeItemHeight,
-                decoration: BoxDecoration(
-                  // border: Border(
-                  //   top: BorderSide(
-                  //     color: widget.timetableStyle.timelineBorderColor,
-                  //     width: 0,
-                  //   ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical:4.0),
+                child: Container(
+                  height: widget.timetableStyle.timeItemHeight,
+                  decoration: BoxDecoration(
+                    // border: Border(
+                    //   top: BorderSide(
+                    //     color: widget.timetableStyle.timelineBorderColor,
+                    //     width: 0,
+                    //   ),
+                    // ),
+                    color: widget.timetableStyle.timelineItemColor,
+                  ),
+                  // child: Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                  //                   .substring(0, 2)[0] ==
+                  //               "0"
+                  //           ? Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                  //                   .substring(1, 2) +
+                  //               " ${hour > 12 ? "PM" : "AM"}"
+                  //           : Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                  //                   .substring(0, 2) +
+                  //               " ${hour > 12 ? "PM" : "AM"}",
+                  //       style: TextStyle(
+                  //           color: widget.timetableStyle.timeItemTextColor),
+                  //     ),
+                  //   ],
                   // ),
-                  color: widget.timetableStyle.timelineItemColor,
                 ),
-                // child: Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   crossAxisAlignment: CrossAxisAlignment.start,
-                //   children: [
-                //     Text(
-                //       Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                //                   .substring(0, 2)[0] ==
-                //               "0"
-                //           ? Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                //                   .substring(1, 2) +
-                //               " ${hour > 12 ? "PM" : "AM"}"
-                //           : Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                //                   .substring(0, 2) +
-                //               " ${hour > 12 ? "PM" : "AM"}",
-                //       style: TextStyle(
-                //           color: widget.timetableStyle.timeItemTextColor),
-                //     ),
-                //   ],
-                // ),
               ),
               Text(
                 Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
