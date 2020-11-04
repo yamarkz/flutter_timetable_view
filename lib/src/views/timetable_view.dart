@@ -135,7 +135,8 @@ class _TimetableViewState extends State<TimetableView>
                                 .substring(0, 2)[0] ==
                             "0"
                         ? Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                            .substring(1, 2)
+                                .substring(1, 2) +
+                            " ${hour > 12 ? "PM" : "AM"}"
                         : Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
                                 .substring(0, 2) +
                             " ${hour > 12 ? "PM" : "AM"}",
