@@ -131,7 +131,7 @@ class _TimetableViewState extends State<TimetableView>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    Utils.hourFormatter(hour, 0),
+                    Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)+ " ${hour>12?"PM":"AM"}",
                     style: TextStyle(
                         color: widget.timetableStyle.timeItemTextColor),
                   ),
