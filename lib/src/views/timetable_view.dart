@@ -157,7 +157,7 @@ class _TimetableViewState extends State<TimetableView>
             decoration: BoxDecoration(border: Border.all(color: Colors.red)),
             width: laneEvents.lane.width,
             height: laneEvents.lane.height,
-            color: laneEvents.lane.backgroundColor,
+            // color: laneEvents.lane.backgroundColor,
             child: Center(
               child: Text(
                 laneEvents.lane.name,
