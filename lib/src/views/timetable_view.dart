@@ -59,7 +59,7 @@ class _TimetableViewState extends State<TimetableView>
           decoration: BoxDecoration(
             color: widget.timetableStyle.cornerColor,
             border: Border.symmetric(
-              horizontal: BorderSide(color: Colors.grey),
+              vertical: BorderSide(color: Colors.grey),
             ),
           ),
         ),
@@ -161,7 +161,7 @@ class _TimetableViewState extends State<TimetableView>
           return Container(
             decoration: BoxDecoration(
               border: Border.symmetric(
-                vertical: BorderSide(color: Colors.grey[300]),
+                horizontal: BorderSide(color: Colors.grey[300]),
               ),
             ),
             width: laneEvents.lane.width,
