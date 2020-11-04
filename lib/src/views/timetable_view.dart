@@ -56,7 +56,12 @@ class _TimetableViewState extends State<TimetableView>
         width: widget.timetableStyle.timeItemWidth,
         height: widget.timetableStyle.laneHeight,
         child: DecoratedBox(
-          decoration: BoxDecoration(color: widget.timetableStyle.cornerColor),
+          decoration: BoxDecoration(
+            color: widget.timetableStyle.cornerColor,
+            border: Border.symmetric(
+              horizontal: BorderSide(color: Colors.grey),
+            ),
+          ),
         ),
       ),
     );
@@ -154,7 +159,11 @@ class _TimetableViewState extends State<TimetableView>
         shrinkWrap: true,
         children: widget.laneEventsList.map((laneEvents) {
           return Container(
-            decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+            decoration: BoxDecoration(
+              border: Border.symmetric(
+                vertical: BorderSide(color: Colors.grey[300]),
+              ),
+            ),
             width: laneEvents.lane.width,
             height: laneEvents.lane.height,
             // color: laneEvents.lane.backgroundColor,
