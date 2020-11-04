@@ -48,7 +48,7 @@ class Utils {
             Utils.hourFormatter(event.start.hour, event.start.minute) +
             ' - ' +
             Utils.hourFormatter(event.end.hour, event.end.minute) +
-            '\n\n',
+            '\n',
       ),
       TextSpan(
         text: event.description,

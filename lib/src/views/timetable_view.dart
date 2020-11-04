@@ -57,7 +57,7 @@ class _TimetableViewState extends State<TimetableView>
         height: widget.timetableStyle.laneHeight,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: widget.timetableStyle.cornerColor,
             border: Border.all(
               color: Colors.grey[300],
             ),
