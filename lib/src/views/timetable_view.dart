@@ -128,6 +128,7 @@ class _TimetableViewState extends State<TimetableView>
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     Utils.hourFormatter(hour, 0),
