@@ -113,28 +113,30 @@ class _TimetableViewState extends State<TimetableView>
           return Stack(
             alignment: Alignment.topCenter,
             children: [
+               Container(
+                height: widget.timetableStyle.timeItemHeight+5,
+                decoration: BoxDecoration(
+                  color: widget.timetableStyle.timelineItemColor,
+                ),
+              ),
               Container(
                 height: widget.timetableStyle.timeItemHeight,
                 decoration: BoxDecoration(
                   color: widget.timetableStyle.timelineItemColor,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: widget.timetableStyle.timeItemHeight),
-                child: Text(
-                  Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                              .substring(0, 2)[0] ==
-                          "0"
-                      ? Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                              .substring(1, 2) +
-                          " ${hour > 12 ? "PM" : "AM"}"
-                      : Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
-                              .substring(0, 2) +
-                          " ${hour > 12 ? "PM" : "AM"}",
-                  style:
-                      TextStyle(color: widget.timetableStyle.timeItemTextColor),
-                ),
+              Text(
+                Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                            .substring(0, 2)[0] ==
+                        "0"
+                    ? Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                            .substring(1, 2) +
+                        " ${hour > 12 ? "PM" : "AM"}"
+                    : Utils.hourFormatter(hour > 12 ? hour - 12 : hour, 0)
+                            .substring(0, 2) +
+                        " ${hour > 12 ? "PM" : "AM"}",
+                style:
+                    TextStyle(color: widget.timetableStyle.timeItemTextColor),
               ),
             ],
           );
