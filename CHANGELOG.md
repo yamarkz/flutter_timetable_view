@@ -1,3 +1,8 @@
+## [0.2.0] - 2020-11-12
+
+* 0.2.0 Release
+* Add decoration line widget
+
 ## [0.1.0] - 2020-03-01
 
 * 0.1.0 Release
