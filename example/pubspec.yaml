@@ -9,7 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  #flutter_timetable_view: ^0.0.3
+# flutter_timetable_view: ^0.2.0
   flutter_timetable_view:
     path: ../../flutter_timetable_view
 
