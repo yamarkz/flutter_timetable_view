@@ -20,6 +20,9 @@ class LaneView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height(),
+      decoration: BoxDecoration(
+          border: Border.symmetric(
+              vertical: BorderSide(color: timetableStyle.timelineBorderColor))),
       width: timetableStyle.laneWidth,
       child: Stack(
         children: [
