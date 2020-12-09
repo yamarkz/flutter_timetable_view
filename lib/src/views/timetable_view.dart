@@ -142,9 +142,10 @@ class _TimetableViewState extends State<TimetableView>
         shrinkWrap: true,
         children: widget.laneEventsList.map((laneEvents) {
           return Container(
-            width: laneEvents.lane.width,
+            width: widget.timetableStyle.laneWidth,
             height: laneEvents.lane.height,
             color: laneEvents.lane.backgroundColor,
+            // color: Colors.red,
             child: Center(
               child: Text(
                 laneEvents.lane.name,
