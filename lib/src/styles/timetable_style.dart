@@ -39,16 +39,18 @@ class TimetableStyle {
 
   final bool visibleDecorationBorder;
 
-  const TimetableStyle({
-    this.startHour: 0,
-    this.endHour: 24,
-    this.laneColor: Colors.white,
-    this.cornerColor: Colors.white,
-    this.timelineColor: Colors.white,
-    this.timelineItemColor: Colors.white,
-    this.mainBackgroundColor: Colors.white,
-    this.decorationLineBorderColor: const Color(0x1A000000),
-    this.timelineBorderColor: const Color(0x1A000000),
+  final Alignment timeItemAlignment; // Aligns timeItem
+
+  const TimetableStyle(
+      {this.startHour: 0,
+      this.endHour: 24,
+      this.laneColor: Colors.white,
+      this.cornerColor: Colors.white,
+      this.timelineColor: Colors.white,
+      this.timelineItemColor: Colors.white,
+      this.mainBackgroundColor: Colors.white,
+      this.decorationLineBorderColor: const Color(0x1A000000),
+      this.timelineBorderColor: const Color(0x1A000000),
     this.timeItemTextColor: Colors.blue,
     this.laneWidth: 300,
     this.laneHeight: 70,
@@ -59,5 +61,6 @@ class TimetableStyle {
     this.decorationLineDashSpaceWidth: 4,
     this.visibleTimeBorder: true,
     this.visibleDecorationBorder: false,
+    this.timeItemAlignment: Alignment.center
   });
 }

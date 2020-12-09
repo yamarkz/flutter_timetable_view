@@ -118,10 +118,14 @@ class _TimetableViewState extends State<TimetableView>
               ),
               color: widget.timetableStyle.timelineItemColor,
             ),
-            child: Text(
-              Utils.hourFormatter(hour, 0),
-              style: TextStyle(color: widget.timetableStyle.timeItemTextColor),
-              textAlign: TextAlign.center,
+            child: Container(
+              alignment: widget.timetableStyle.timeItemAlignment,
+              child: Text(
+                Utils.hourFormatter(hour, 0),
+                style:
+                    TextStyle(color: widget.timetableStyle.timeItemTextColor),
+                textAlign: TextAlign.center,
+              ),
             ),
           );
         }).toList(),
