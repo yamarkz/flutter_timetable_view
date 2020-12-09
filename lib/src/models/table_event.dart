@@ -25,7 +25,7 @@ class TableEvent {
     @required this.start,
     @required this.end,
     this.padding: const EdgeInsets.all(10),
-    this.margin,
+    this.margin: const EdgeInsets.all(1),
     this.onTap,
     this.decoration,
     this.backgroundColor: const Color(0xCC2196F3),
