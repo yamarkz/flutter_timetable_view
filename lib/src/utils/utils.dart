@@ -28,8 +28,16 @@ class Utils {
         _addLeadingZero(day);
   }
 
-  static String hourFormatter(int hour, int minute) {
+  static String formatHourInto24Hours(int hour, int minute) {
     return _addLeadingZero(hour) + ':' + _addLeadingZero(minute);
+  }
+
+  static String hourFormatter(int hour, int minute, bool showAsAMPM) {
+    if (showAsAMPM) {
+      return formatHourIntoAmPM(hour, minute);
+    } else {
+      return formatHourInto24Hours(hour, minute);
+    }
   }
 
   static Widget eventText(
@@ -45,9 +53,9 @@ class Utils {
       ),
       TextSpan(
         text: ' ' +
-            Utils.hourFormatter(event.start.hour, event.start.minute) +
+            Utils.formatHourInto24Hours(event.start.hour, event.start.minute) +
             ' - ' +
-            Utils.hourFormatter(event.end.hour, event.end.minute) +
+            Utils.formatHourInto24Hours(event.end.hour, event.end.minute) +
             '\n\n',
       ),
     ];
@@ -131,5 +139,18 @@ class Utils {
     );
 
     return true;
+  }
+
+  static String formatHourIntoAmPM(int hour, int minute) {
+    String formattedString = hour > 12 ? (hour - 12).toString() : hour
+        .toString();
+
+    // if minute is 0, just display time as 12 Am, or 2 PM
+    if (minute > 0) {
+      formattedString += ":" + _addLeadingZero(minute);
+    }
+
+    formattedString += " ${hour > 12 ? "PM" : "AM"}";
+    return formattedString;
   }
 }
