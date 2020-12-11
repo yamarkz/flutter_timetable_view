@@ -8,12 +8,20 @@ class LaneView extends StatelessWidget {
   final List<TableEvent> events;
   final TimetableStyle timetableStyle;
 
+  /// Index is used to uniquely identify each lane
+  final int index;
+  final Function(int laneIndex, int start, int end) onEmptyCellTap;
+
   const LaneView({
     Key key,
     @required this.events,
     @required this.timetableStyle,
-  })  : assert(events != null),
+    @required this.index,
+    @required this.onEmptyCellTap,
+  })
+      : assert(events != null),
         assert(timetableStyle != null),
+        assert(onEmptyCellTap != null),
         super(key: key);
 
   @override
@@ -32,6 +40,8 @@ class LaneView extends StatelessWidget {
               ),
             )
           ],
+          // draw the empty time slots before you draw the events.
+          ..._buildEmptyTimeSlots(index),
           ...events.map((event) {
             return EventView(
               event: event,
@@ -46,5 +56,70 @@ class LaneView extends StatelessWidget {
   double height() {
     return (timetableStyle.endHour - timetableStyle.startHour) *
         timetableStyle.timeItemHeight;
+  }
+
+  /// Draws the Empty Time Slot for each Lane
+  _buildEmptyTimeSlots(int laneIndex) {
+    List<_EmptyTimeSlot> emptyTimeSlots = <_EmptyTimeSlot>[];
+
+    // I don't know if this is performant but i cant think of something else for now
+    for (int i = timetableStyle.startHour; i < timetableStyle.endHour; i++) {
+      emptyTimeSlots.add(_EmptyTimeSlot(
+        timetableStyle,
+        laneIndex: laneIndex,
+        onTap: onEmptyCellTap,
+        start: i,
+        end: i + 1,
+      ));
+    }
+
+    return emptyTimeSlots;
+  }
+}
+
+class _EmptyTimeSlot extends StatelessWidget {
+  final TimetableStyle timetableStyle;
+  final int laneIndex;
+  final int start;
+  final int end;
+  final Function(int laneIndex, int start, int end) onTap;
+
+  _EmptyTimeSlot(this.timetableStyle,
+      {this.laneIndex, this.start, this.end, @required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: top(),
+      height: height(),
+      left: 0,
+      width: timetableStyle.laneWidth,
+      child: GestureDetector(
+        onTap: () {
+          onTap(laneIndex, start, end);
+        },
+        child: Container(
+          decoration: BoxDecoration(color: Colors.transparent),
+          margin: const EdgeInsets.all(1),
+          padding: const EdgeInsets.all(1),
+        ),
+      ),
+    );
+  }
+
+  double top() {
+    return calculateTopOffset(start, 00, timetableStyle.timeItemHeight) -
+        timetableStyle.startHour * timetableStyle.timeItemHeight;
+  }
+
+  double height() {
+    return calculateTopOffset(0, 60, timetableStyle.timeItemHeight) + 1;
+  }
+
+  double calculateTopOffset(int hour, [
+    int minute = 0,
+    double hourRowHeight,
+  ]) {
+    return (hour + (minute / 60)) * (hourRowHeight ?? 60);
   }
 }
