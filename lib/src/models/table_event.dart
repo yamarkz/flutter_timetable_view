@@ -12,7 +12,7 @@ class TableEvent {
 
   final EdgeInsets margin;
 
-  final VoidCallback onTap;
+  final Function(String title, TableEventTime start, TableEventTime end) onTap;
 
   final BoxDecoration decoration;
 

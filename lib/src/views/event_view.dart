@@ -25,7 +25,9 @@ class EventView extends StatelessWidget {
       left: 0,
       width: timetableStyle.laneWidth,
       child: GestureDetector(
-        onTap: event.onTap,
+        onTap: () {
+          event.onTap(event.title, event.start, event.end);
+        },
         child: Container(
           decoration: event.decoration ??
               (event.backgroundColor != null
