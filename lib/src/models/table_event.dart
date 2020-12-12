@@ -12,7 +12,7 @@ class TableEvent {
 
   final EdgeInsets margin;
 
-  final Function(
+  final void Function(
           int laneIndex, String title, TableEventTime start, TableEventTime end)
       onTap;
 

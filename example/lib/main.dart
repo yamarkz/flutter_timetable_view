@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
   }
 
-  onEventCallBack(
+  void onEventCallBack(
       int laneIndex, String title, TableEventTime start, TableEventTime end) {
     print(
         "Event Clicked!! LaneIndex $laneIndex Title: $title StartHour: ${start.hour} EndHour: ${end.hour}");
