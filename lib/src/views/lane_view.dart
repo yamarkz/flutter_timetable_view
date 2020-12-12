@@ -47,6 +47,7 @@ class LaneView extends StatelessWidget {
             return EventView(
               event: event,
               timetableStyle: timetableStyle,
+              laneIndex: index,
             );
           }).toList(),
         ],

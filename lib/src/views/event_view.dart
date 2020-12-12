@@ -9,11 +9,16 @@ class EventView extends StatelessWidget {
   final TableEvent event;
   final TimetableStyle timetableStyle;
 
+  //  Uniquely identifies which lane the event belongs to
+  final int laneIndex;
+
   const EventView({
     Key key,
     @required this.event,
     @required this.timetableStyle,
-  })  : assert(event != null),
+    @required this.laneIndex
+  })
+      : assert(event != null),
         assert(timetableStyle != null),
         super(key: key);
 
@@ -26,7 +31,7 @@ class EventView extends StatelessWidget {
       width: timetableStyle.laneWidth,
       child: GestureDetector(
         onTap: () {
-          event.onTap(event.title, event.start, event.end);
+          event.onTap(laneIndex, event.title, event.start, event.end);
         },
         child: Container(
           decoration: event.decoration ??
