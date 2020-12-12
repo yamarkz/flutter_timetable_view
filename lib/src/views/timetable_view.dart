@@ -119,7 +119,8 @@ class _TimetableViewState extends State<TimetableView>
               color: widget.timetableStyle.timelineItemColor,
             ),
             child: Text(
-              Utils.hourFormatter(hour, 0),
+              Utils.hourFormatter(
+                  hour, 0, widget.timetableStyle.showTimeAsAMPM),
               style: TextStyle(color: widget.timetableStyle.timeItemTextColor),
               textAlign: TextAlign.center,
             ),
@@ -129,6 +130,7 @@ class _TimetableViewState extends State<TimetableView>
     );
   }
 
+  // Builds the Lane Headers / The Lane Labels
   Widget _buildLaneList(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
