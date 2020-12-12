@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timetable_view/flutter_timetable_view.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
 import 'package:flutter_timetable_view/src/styles/background_painter.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
@@ -10,7 +11,8 @@ class LaneView extends StatelessWidget {
 
   /// Index is used to uniquely identify each lane
   final int index;
-  final Function(int laneIndex, int start, int end) onEmptyCellTap;
+  final Function(int laneIndex, TableEventTime start, TableEventTime end)
+      onEmptyCellTap;
 
   const LaneView({
     Key key,
@@ -18,8 +20,7 @@ class LaneView extends StatelessWidget {
     @required this.timetableStyle,
     @required this.index,
     @required this.onEmptyCellTap,
-  })
-      : assert(events != null),
+  })  : assert(events != null),
         assert(timetableStyle != null),
         assert(onEmptyCellTap != null),
         super(key: key);
@@ -68,8 +69,8 @@ class LaneView extends StatelessWidget {
         timetableStyle,
         laneIndex: laneIndex,
         onTap: onEmptyCellTap,
-        start: i,
-        end: i + 1,
+        start: TableEventTime(hour: i, minute: 0),
+        end: TableEventTime(hour: i + 1, minute: 0),
       ));
     }
 
@@ -80,9 +81,9 @@ class LaneView extends StatelessWidget {
 class _EmptyTimeSlot extends StatelessWidget {
   final TimetableStyle timetableStyle;
   final int laneIndex;
-  final int start;
-  final int end;
-  final Function(int laneIndex, int start, int end) onTap;
+  final TableEventTime start;
+  final TableEventTime end;
+  final Function(int laneIndex, TableEventTime start, TableEventTime end) onTap;
 
   _EmptyTimeSlot(this.timetableStyle,
       {this.laneIndex, this.start, this.end, @required this.onTap});
@@ -108,12 +109,15 @@ class _EmptyTimeSlot extends StatelessWidget {
   }
 
   double top() {
-    return calculateTopOffset(start, 00, timetableStyle.timeItemHeight) -
+    return calculateTopOffset(
+        start.hour, start.minute, timetableStyle.timeItemHeight) -
         timetableStyle.startHour * timetableStyle.timeItemHeight;
   }
 
   double height() {
-    return calculateTopOffset(0, 60, timetableStyle.timeItemHeight) + 1;
+    return calculateTopOffset(0, end
+        .difference(start)
+        .inMinutes, timetableStyle.timeItemHeight) + 1;
   }
 
   double calculateTopOffset(int hour, [

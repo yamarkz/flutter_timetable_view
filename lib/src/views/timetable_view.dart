@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timetable_view/flutter_timetable_view.dart';
 import 'package:flutter_timetable_view/src/models/lane_events.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/utils/utils.dart';
@@ -11,7 +12,8 @@ class TimetableView extends StatefulWidget {
   final TimetableStyle timetableStyle;
 
   /// Called when an empty slot or cell is tapped must not be null
-  final Function(int laneIndex, int start, int end) onEmptySlotTap;
+  final Function(int laneIndex, TableEventTime start, TableEventTime end)
+      onEmptySlotTap;
 
   TimetableView(
       {Key key,
