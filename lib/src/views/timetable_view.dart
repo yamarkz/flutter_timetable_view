@@ -12,7 +12,7 @@ class TimetableView extends StatefulWidget {
   final TimetableStyle timetableStyle;
 
   /// Called when an empty slot or cell is tapped must not be null
-  final Function(int laneIndex, TableEventTime start, TableEventTime end)
+  final void Function(int laneIndex, TableEventTime start, TableEventTime end)
       onEmptySlotTap;
 
   TimetableView(
