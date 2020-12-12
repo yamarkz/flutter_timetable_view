@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_timetable_view/flutter_timetable_view.dart';
 import 'package:flutter_timetable_view/src/models/lane_events.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/utils/utils.dart';
@@ -10,11 +11,17 @@ class TimetableView extends StatefulWidget {
   final List<LaneEvents> laneEventsList;
   final TimetableStyle timetableStyle;
 
-  TimetableView({
-    Key key,
-    @required this.laneEventsList,
-    this.timetableStyle: const TimetableStyle(),
-  })  : assert(laneEventsList != null),
+  /// Called when an empty slot or cell is tapped must not be null
+  final Function(int laneIndex, TableEventTime start, TableEventTime end)
+      onEmptySlotTap;
+
+  TimetableView(
+      {Key key,
+      @required this.laneEventsList,
+      this.timetableStyle: const TimetableStyle(),
+      @required this.onEmptySlotTap})
+      : assert(laneEventsList != null),
+        assert(onEmptySlotTap != null),
         super(key: key);
 
   @override
@@ -23,6 +30,7 @@ class TimetableView extends StatefulWidget {
 
 class _TimetableViewState extends State<TimetableView>
     with TimetableViewController {
+
   @override
   void initState() {
     initController();
@@ -61,6 +69,7 @@ class _TimetableViewState extends State<TimetableView>
     );
   }
 
+  /// This Draws the main Content the Lanes & Respective Events
   Widget _buildMainContent(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
@@ -80,8 +89,10 @@ class _TimetableViewState extends State<TimetableView>
           child: Row(
             children: widget.laneEventsList.map((laneEvents) {
               return LaneView(
-                events: laneEvents.events,
-                timetableStyle: widget.timetableStyle,
+                  events: laneEvents.events,
+                  timetableStyle: widget.timetableStyle,
+                  index: widget.laneEventsList.indexOf(laneEvents),
+                  onEmptyCellTap: widget.onEmptySlotTap
               );
             }).toList(),
           ),
@@ -90,6 +101,7 @@ class _TimetableViewState extends State<TimetableView>
     );
   }
 
+  /// Builds the TimeLine on the Left from start Hour to endHour
   Widget _buildTimelineList(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
@@ -129,6 +141,7 @@ class _TimetableViewState extends State<TimetableView>
     );
   }
 
+  /// Builds Only the Lanes Headers / Labels
   Widget _buildLaneList(BuildContext context) {
     return Container(
       alignment: Alignment.topLeft,
