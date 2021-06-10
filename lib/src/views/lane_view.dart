@@ -9,11 +9,10 @@ class LaneView extends StatelessWidget {
   final TimetableStyle timetableStyle;
 
   const LaneView({
-    Key key,
-    @required this.events,
-    @required this.timetableStyle,
-  })  : assert(events != null),
-        assert(timetableStyle != null),
+    Key? key,
+    required this.events,
+    required this.timetableStyle,
+  })  : 
         super(key: key);
 
   @override

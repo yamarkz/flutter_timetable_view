@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
 
 class Utils {
-  static bool sameDay(DateTime date, [DateTime target]) {
+  static bool sameDay(DateTime date, [DateTime? target]) {
     target = target ?? DateTime.now();
     return target.year == date.year &&
         target.month == date.month &&
@@ -52,7 +52,7 @@ class Utils {
       ),
     ];
 
-    bool exceedHeight;
+    bool? exceedHeight;
     while (exceedHeight ?? true) {
       exceedHeight = _exceedHeight(text, event.textStyle, height, width);
       if (exceedHeight == null || !exceedHeight) {
@@ -79,10 +79,10 @@ class Utils {
     return (number < 10 ? '0' : '') + number.toString();
   }
 
-  static bool _exceedHeight(
+  static bool? _exceedHeight(
       List<TextSpan> input, TextStyle textStyle, double height, double width) {
-    double fontSize = textStyle?.fontSize ?? 14;
-    int maxLines = height ~/ ((textStyle?.height ?? 1.2) * fontSize);
+    double fontSize = textStyle.fontSize ?? 14;
+    int maxLines = height ~/ ((textStyle.height ?? 1.2) * fontSize);
     if (maxLines == 0) {
       return null;
     }
@@ -105,7 +105,7 @@ class Utils {
     }
 
     TextSpan last = input.last;
-    String text = last.text;
+    String text = last.text!;
     if (text.isEmpty || text == ellipse) {
       input.removeLast();
 

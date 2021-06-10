@@ -10,28 +10,26 @@ class TableEvent {
 
   final EdgeInsets padding;
 
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  final BoxDecoration decoration;
+  final BoxDecoration? decoration;
 
   final Color backgroundColor;
 
   final TextStyle textStyle;
 
   TableEvent({
-    @required this.title,
-    @required this.start,
-    @required this.end,
+    required this.title,
+    required this.start,
+    required this.end,
     this.padding: const EdgeInsets.all(10),
     this.margin,
     this.onTap,
     this.decoration,
     this.backgroundColor: const Color(0xCC2196F3),
     this.textStyle: const TextStyle(color: Colors.white),
-  })  : assert(title != null),
-        assert(start != null),
-        assert(end != null),
+  })  : 
         assert(end.isAfter(start));
 }

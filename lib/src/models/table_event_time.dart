@@ -4,11 +4,11 @@ class TableEventTime extends DateTime {
   final int minute;
 
   TableEventTime({
-    this.hour,
-    this.minute,
-  })  : assert(hour != null),
+    required this.hour,
+    required this.minute,
+  })  : 
         assert(24 >= hour),
-        assert(minute != null),
+       
         assert(60 >= minute),
         super(
           DateTime.now().year,
