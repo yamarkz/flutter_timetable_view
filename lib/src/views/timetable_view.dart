@@ -11,11 +11,10 @@ class TimetableView extends StatefulWidget {
   final TimetableStyle timetableStyle;
 
   TimetableView({
-    Key key,
-    @required this.laneEventsList,
+    Key? key,
+    required this.laneEventsList,
     this.timetableStyle: const TimetableStyle(),
-  })  : assert(laneEventsList != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _TimetableViewState createState() => _TimetableViewState();

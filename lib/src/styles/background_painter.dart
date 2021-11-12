@@ -5,8 +5,8 @@ class BackgroundPainter extends CustomPainter {
   final TimetableStyle timetableStyle;
 
   BackgroundPainter({
-    this.timetableStyle,
-  }) : assert(timetableStyle != null);
+    required this.timetableStyle,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {

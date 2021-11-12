@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class DiagonalScrollView extends StatefulWidget {
   final Widget child;
 
-  final ValueChanged<Offset> onScroll;
+  final ValueChanged<Offset>? onScroll;
 
   final double maxWidth;
 
@@ -13,20 +13,20 @@ class DiagonalScrollView extends StatefulWidget {
 
   final double flingVelocityReduction;
 
-  final StreamController horizontalPixelsStreamController;
+  final StreamController? horizontalPixelsStreamController;
 
-  final StreamController verticalPixelsStreamController;
+  final StreamController? verticalPixelsStreamController;
 
   DiagonalScrollView({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.onScroll,
     this.maxWidth: double.infinity,
     this.maxHeight: double.infinity,
     this.flingVelocityReduction: 1,
     this.horizontalPixelsStreamController,
     this.verticalPixelsStreamController,
-  })  : assert(child != null),
+  })  : 
         super(key: key);
 
   @override
@@ -35,44 +35,44 @@ class DiagonalScrollView extends StatefulWidget {
 
 class _DiagonalScrollViewState extends State<DiagonalScrollView>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<Offset> _animation;
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
   Offset _position = Offset(0, 0);
   Offset _lastFocalPoint = Offset(0, 0);
   GlobalKey _positionedKey = GlobalKey();
 
-  RenderBox get renderBox {
-    return context.findRenderObject() as RenderBox;
+  RenderBox? get renderBox {
+    return context.findRenderObject() as RenderBox?;
   }
 
   double get containerWidth {
-    return renderBox?.size?.width ?? 0;
+    return renderBox?.size.width ?? 0;
   }
 
   double get containerHeight {
-    return renderBox?.size?.height ?? 0;
+    return renderBox?.size.height ?? 0;
   }
 
-  RenderBox get positionedRenderBox {
-    return _positionedKey.currentContext?.findRenderObject() as RenderBox;
+  RenderBox? get positionedRenderBox {
+    return _positionedKey.currentContext?.findRenderObject() as RenderBox?;
   }
 
   double get positionedWidth {
-    return positionedRenderBox?.size?.width ?? 0;
+    return positionedRenderBox?.size.width ?? 0;
   }
 
   double get positionedHeight {
-    return positionedRenderBox?.size?.height ?? 0;
+    return positionedRenderBox?.size.height ?? 0;
   }
 
   void _emitScroll() {
     if (widget.onScroll != null) {
-      widget.onScroll(_position);
+      widget.onScroll!(_position);
     }
   }
 
   Offset _rectifyChildPosition({
-    Offset position,
+    required Offset position,
     Offset offset: const Offset(0, 0),
   }) {
     Offset containerScaled = Offset(containerWidth, containerHeight);
@@ -99,11 +99,11 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
   }
 
   void _handleScaleStart(ScaleStartDetails details) {
-    _lastFocalPoint = renderBox.globalToLocal(details.focalPoint);
+    _lastFocalPoint = renderBox!.globalToLocal(details.focalPoint);
   }
 
   void _handleScaleUpdate(ScaleUpdateDetails details) {
-    Offset focalPoint = renderBox.globalToLocal(details.focalPoint);
+    Offset focalPoint = renderBox!.globalToLocal(details.focalPoint);
     Offset deltaScaled = focalPoint - _lastFocalPoint;
     Offset newPosition = _rectifyChildPosition(
       position: _position + deltaScaled,
@@ -151,13 +151,13 @@ class _DiagonalScrollViewState extends State<DiagonalScrollView>
     _controller = AnimationController(vsync: this)
       ..addListener(_handleFlingAnimation);
 
-    widget.horizontalPixelsStreamController.stream.listen((pixels) {
+    widget.horizontalPixelsStreamController!.stream.listen((pixels) {
       setState(() {
         _position = Offset(-pixels, _position.dy);
       });
     });
 
-    widget.verticalPixelsStreamController.stream.listen((pixels) {
+    widget.verticalPixelsStreamController!.stream.listen((pixels) {
       setState(() {
         _position = Offset(_position.dx, -pixels);
       });
