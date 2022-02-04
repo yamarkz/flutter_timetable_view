@@ -117,10 +117,14 @@ class _TimetableViewState extends State<TimetableView>
               ),
               color: widget.timetableStyle.timelineItemColor,
             ),
-            child: Text(
-              Utils.hourFormatter(hour, 0),
-              style: TextStyle(color: widget.timetableStyle.timeItemTextColor),
-              textAlign: TextAlign.center,
+            child: Container(
+              alignment: widget.timetableStyle.timeItemAlignment,
+              child: Text(
+                Utils.hourFormatter(hour, 0),
+                style:
+                    TextStyle(color: widget.timetableStyle.timeItemTextColor),
+                textAlign: TextAlign.center,
+              ),
             ),
           );
         }).toList(),
@@ -141,9 +145,10 @@ class _TimetableViewState extends State<TimetableView>
         shrinkWrap: true,
         children: widget.laneEventsList.map((laneEvents) {
           return Container(
-            width: laneEvents.lane.width,
+            width: widget.timetableStyle.laneWidth,
             height: laneEvents.lane.height,
             color: laneEvents.lane.backgroundColor,
+            // color: Colors.red,
             child: Center(
               child: Text(
                 laneEvents.lane.name,
