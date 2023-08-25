@@ -6,15 +6,13 @@ class TableEventTime extends DateTime {
   TableEventTime({
     required this.hour,
     required this.minute,
-  })  : 
-        assert(24 >= hour),
-       
+  })  : assert(24 >= hour),
         assert(60 >= minute),
         super(
-          DateTime.now().year,
-          DateTime.now().month,
-          DateTime.now().day,
-          hour,
-          minute,
-        );
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        hour,
+        minute,
+      );
 }

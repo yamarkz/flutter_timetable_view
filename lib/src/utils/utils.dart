@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
 
+
 class Utils {
   static bool sameDay(DateTime date, [DateTime? target]) {
     target = target ?? DateTime.now();
@@ -28,28 +29,50 @@ class Utils {
         _addLeadingZero(day);
   }
 
-  static String hourFormatter(int hour, int minute) {
+  static String formatHourInto24Hours(int hour, int minute) {
     return _addLeadingZero(hour) + ':' + _addLeadingZero(minute);
   }
 
+  static String hourFormatter(int hour, int minute, bool showAsAMPM) {
+    if (showAsAMPM) {
+      return formatHourIntoAmPM(hour, minute);
+    } else {
+      return formatHourInto24Hours(hour, minute);
+    }
+  }
+
+  static String formatHourIntoAmPM(int hour, int minute) {
+    String formattedString = '';
+
+    // convert 0 Am to 12 Am
+    if (hour == 0) {
+      formattedString = "12";
+    } else {
+      formattedString = hour > 12 ? (hour - 12).toString() : hour.toString();
+    }
+
+    // if minute is 0, just display time as 12 Am, or 2 PM
+    if (minute > 0) {
+      formattedString += ":" + _addLeadingZero(minute);
+    }
+
+    formattedString += " ${hour >= 12 ? "PM" : "AM"}";
+
+    return formattedString;
+  }
+
   static Widget eventText(
-    TableEvent event,
-    BuildContext context,
-    double height,
-    double width,
-  ) {
+      TableEvent event,
+      BuildContext context,
+      double height,
+      double width,
+      ) {
     List<TextSpan> text = [
       TextSpan(
         text: event.title,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      TextSpan(
-        text: ' ' +
-            Utils.hourFormatter(event.start.hour, event.start.minute) +
-            ' - ' +
-            Utils.hourFormatter(event.end.hour, event.end.minute) +
-            '\n\n',
-      ),
+      TextSpan(text: event.location, style: TextStyle(color: Colors.white60)),
     ];
 
     bool? exceedHeight;
@@ -133,3 +156,4 @@ class Utils {
     return true;
   }
 }
+
