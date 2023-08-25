@@ -24,12 +24,12 @@ class TableEvent {
     required this.title,
     required this.start,
     required this.end,
-    this.padding: const EdgeInsets.all(10),
+    this.padding= const EdgeInsets.all(10),
     this.margin,
     this.onTap,
     this.decoration,
-    this.backgroundColor: const Color(0xCC2196F3),
-    this.textStyle: const TextStyle(color: Colors.white),
+    this.backgroundColor= const Color(0xCC2196F3),
+    this.textStyle= const TextStyle(color: Colors.white),
   })  : 
         assert(end.isAfter(start));
 }

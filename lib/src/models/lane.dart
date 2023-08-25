@@ -13,9 +13,9 @@ class Lane {
 
   Lane({
     required this.name,
-    this.height: 70,
-    this.width: 300,
-    this.backgroundColor: Colors.white,
-    this.textStyle: const TextStyle(color: Colors.blue),
+    this.height= 70,
+    this.width= 300,
+    this.backgroundColor= Colors.white,
+    this.textStyle= const TextStyle(color: Colors.blue),
   });
 }

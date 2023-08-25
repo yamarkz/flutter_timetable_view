@@ -13,7 +13,7 @@ class TimetableView extends StatefulWidget {
   TimetableView({
     Key? key,
     required this.laneEventsList,
-    this.timetableStyle: const TimetableStyle(),
+    this.timetableStyle= const TimetableStyle(),
   }) : super(key: key);
 
   @override
