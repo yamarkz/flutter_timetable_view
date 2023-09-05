@@ -20,6 +20,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: TimetableView(
+        statusColor: Colors.pink,
         timetableStyle: TimetableStyle(laneWidth: 100,mainBackgroundColor: Colors.black12,),
         laneEventsList: [
           LaneEvents(

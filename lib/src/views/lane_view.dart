@@ -8,7 +8,7 @@ import 'package:flutter_timetable_view/src/views/event_view.dart';
 class LaneView extends StatelessWidget {
   final List<TableEvent> events;
   final TimetableStyle timetableStyle;
-
+  final Color statusColor;
   /// Index is used to uniquely identify each lane
   final int index;
 
@@ -25,6 +25,7 @@ class LaneView extends StatelessWidget {
     required this.index,
     required this.onEmptyCellTap,
     required this.onEventTap,
+    required this.statusColor,
   })  : super(key: key);
 
   @override
@@ -59,6 +60,7 @@ class LaneView extends StatelessWidget {
               event: event,
               timetableStyle: timetableStyle,
               laneIndex: index,
+              statusColor: statusColor,
             );
           }).toList(),
         ],

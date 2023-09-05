@@ -8,7 +8,7 @@ import 'package:flutter_timetable_view/src/utils/utils.dart';
 class EventView extends StatelessWidget {
   final TableEvent event;
   final TimetableStyle timetableStyle;
-
+  final Color statusColor;
   //  Uniquely identifies which lane the event belongs to or falls other
   final int laneIndex;
 
@@ -22,7 +22,10 @@ class EventView extends StatelessWidget {
         required this.event,
         required this.timetableStyle,
         required this.laneIndex,
-        required this.onEventTap})
+        required this.onEventTap,
+        required this.statusColor,
+
+      })
       : super(key: key);
 
   @override
@@ -69,7 +72,7 @@ class EventView extends StatelessWidget {
                 width: 16, // Adjust the size as needed
                 height: 16, // Adjust the size as needed
                 decoration: BoxDecoration(
-                  color: Colors.red, // Adjust the color as needed
+                  color: statusColor, // Adjust the color as needed
                   shape: BoxShape.circle,
                 ),
               ),

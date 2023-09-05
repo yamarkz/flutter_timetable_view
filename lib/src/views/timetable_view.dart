@@ -11,7 +11,7 @@ import 'package:flutter_timetable_view/src/views/lane_view.dart';
 class TimetableView extends StatefulWidget {
   final List<LaneEvents> laneEventsList;
   final TimetableStyle timetableStyle;
-
+  final Color statusColor;
   /// Called when an empty slot or cell is tapped must not be null
   final void Function(int laneIndex, TableEventTime start, TableEventTime end)
   onEmptySlotTap;
@@ -25,6 +25,7 @@ class TimetableView extends StatefulWidget {
     this.timetableStyle= const TimetableStyle(),
     required this.onEmptySlotTap,
     required this.onEventTap,
+    required this.statusColor,
   })  : super(key: key);
 
   @override
@@ -101,6 +102,7 @@ class _TimetableViewState extends State<TimetableView>
               Row(
                 children: widget.laneEventsList.map((laneEvent) {
                   return LaneView(
+                    statusColor: widget.statusColor,
                       events: laneEvent.events,
                       timetableStyle: widget.timetableStyle,
                       index: widget.laneEventsList.indexOf(laneEvent),
