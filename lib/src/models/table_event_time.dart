@@ -15,4 +15,10 @@ class TableEventTime extends DateTime {
         hour,
         minute,
       );
+  String toTimeString() => "${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}:00";
+
+  factory TableEventTime.fromTimeString(String s) {
+    var parts = s.split(":");
+    return TableEventTime(hour: int.parse(parts[0]), minute: int.parse(parts[1]));
+  }
 }
