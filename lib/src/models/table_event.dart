@@ -12,7 +12,7 @@ class TableEvent {
   final int laneIndex;
 
   /// Optional. Preferably abbreviate string to less than 5 characters
-  final String location;
+  final String price;
 
   final TableEventTime startTime;
 
@@ -37,7 +37,7 @@ class TableEvent {
     required this.title,
     required this.eventId,
     required this.laneIndex,
-    this.location= '',
+    this.price= '',
     required this.startTime,
     required this.endTime,
     this.padding= const EdgeInsets.all(10),

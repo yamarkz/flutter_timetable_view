@@ -67,34 +67,19 @@ class Utils {
       double height,
       double width,
       ) {
-    List<TextSpan> text = [
-      TextSpan(
-        text: event.title,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      TextSpan(text: event.location, style: TextStyle(color: Colors.white60)),
-    ];
-
-    bool? exceedHeight;
-    while (exceedHeight ?? true) {
-      exceedHeight = _exceedHeight(text, event.textStyle, height, width);
-      if (exceedHeight == null || !exceedHeight) {
-        if (exceedHeight == null) {
-          text.clear();
-        }
-        break;
-      }
-
-      if (!_ellipsize(text)) {
-        break;
-      }
-    }
-
-    return RichText(
-      text: TextSpan(
-        children: text,
-        style: event.textStyle,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center, // aligns text to the left
+      children: [
+        Text(
+          event.title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 5,),
+        Text(
+          event.price,
+          style: TextStyle(color: Colors.white60),
+        ),
+      ],
     );
   }
 

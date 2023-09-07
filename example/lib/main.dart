@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/flutter_timetable_view.dart';
 
-void main() => runApp(MyApp());
+void main() {
+runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -32,6 +34,7 @@ class MyHomePage extends StatelessWidget {
                 TableEvent(
                   title: 'An event 1',
                   eventId: 1,
+                  price: '43',
                   laneIndex: 1,
                   startTime: TableEventTime(hour: 10, minute: 0),
                   endTime: TableEventTime(hour: 11, minute: 20),
@@ -45,54 +48,16 @@ class MyHomePage extends StatelessWidget {
               events: [
                 TableEvent(
                   title: 'An event 1',
+
                   eventId: 1,
+                  price: '43',
                   laneIndex: 1,
                   startTime: TableEventTime(hour: 10, minute: 0),
                   endTime: TableEventTime(hour: 10, minute: 59),
                 ),
               ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'زمین ۳',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'زمین ۴',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'زمین ۵',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
+
+
           LaneEvents(
               lane: Lane(
                 name: 'زمین ۶',
@@ -101,7 +66,9 @@ class MyHomePage extends StatelessWidget {
               events: [
                 TableEvent(
                   title: 'An event 1',
+
                   eventId: 1,
+                  price: '43',
                   laneIndex: 1,
                   startTime: TableEventTime(hour: 10, minute: 0),
                   endTime: TableEventTime(hour: 11, minute: 20),
@@ -114,6 +81,7 @@ class MyHomePage extends StatelessWidget {
               ),
               events: [
                 TableEvent(
+
                   title: 'An event 1',
                   eventId: 1,
                   laneIndex: 1,
@@ -129,6 +97,7 @@ class MyHomePage extends StatelessWidget {
               events: [
                 TableEvent(
                   title: 'An event 1',
+                  price: '43',
                   eventId: 1,
                   laneIndex: 1,
                   startTime: TableEventTime(hour: 10, minute: 0),
@@ -143,96 +112,15 @@ class MyHomePage extends StatelessWidget {
               events: [
                 TableEvent(
                   title: 'An event 1',
+                  price: '433454345',
                   eventId: 1,
                   laneIndex: 1,
                   startTime: TableEventTime(hour: 10, minute: 0),
                   endTime: TableEventTime(hour: 11, minute: 20),
                 ),
               ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
-          LaneEvents(
-              lane: Lane(
-                name: 'Track B',
-                laneIndex: 0,
-              ),
-              events: [
-                TableEvent(
-                  title: 'An event 1',
-                  eventId: 1,
-                  laneIndex: 1,
-                  startTime: TableEventTime(hour: 10, minute: 0),
-                  endTime: TableEventTime(hour: 11, minute: 20),
-                ),
-              ]),
+
+
         ],
         onEmptySlotTap:
             (int laneIndex, TableEventTime start, TableEventTime end) {},
