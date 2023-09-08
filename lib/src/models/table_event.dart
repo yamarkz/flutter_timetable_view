@@ -32,8 +32,13 @@ class TableEvent {
   final Color backgroundColor;
 
   final TextStyle textStyle;
+  final TextStyle? titleTextStyle;
+  final TextStyle? priceTextStyle;
+
 
   TableEvent({
+    this.titleTextStyle,
+    this.priceTextStyle,
     required this.title,
     required this.eventId,
     required this.laneIndex,

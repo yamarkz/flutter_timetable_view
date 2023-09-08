@@ -72,12 +72,12 @@ class Utils {
       children: [
         Text(
           event.title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10),
         ),
         SizedBox(height: 5,),
         Text(
           event.price,
-          style: TextStyle(color: Colors.white60),
+          style: TextStyle(color: Colors.white60,fontSize: 10),
         ),
       ],
     );
