@@ -77,7 +77,7 @@ class Utils {
         SizedBox(height: 5,),
         Text(
           event.price,
-          style: TextStyle(color: Colors.white60,fontSize: 5),
+          style: TextStyle(color: Colors.white60,fontSize: 10),
         ),
       ],
     );
