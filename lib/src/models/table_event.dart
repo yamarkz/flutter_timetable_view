@@ -32,13 +32,13 @@ class TableEvent {
   final Color backgroundColor;
 
   final TextStyle textStyle;
-  final TextStyle? titleTextStyle;
-  final TextStyle? priceTextStyle;
+  final TextStyle titleTextStyle;
+  final TextStyle priceTextStyle;
 
 
   TableEvent({
-    this.titleTextStyle,
-    this.priceTextStyle,
+    this.titleTextStyle=const TextStyle(color: Colors.white),
+    this.priceTextStyle= const TextStyle(color: Colors.white),
     required this.title,
     required this.eventId,
     required this.laneIndex,
@@ -51,7 +51,8 @@ class TableEvent {
     this.decoration,
     this.backgroundColor= const Color(0xCC2196F3),
     this.textStyle= const TextStyle(color: Colors.white),
-  })  : assert(endTime.isAfter(startTime));
+  }) : assert(endTime.isAfter(startTime));
+
 }
 
 
