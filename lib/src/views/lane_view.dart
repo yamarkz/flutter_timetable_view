@@ -4,7 +4,7 @@ import 'package:flutter_timetable_view/src/models/table_event_time.dart';
 import 'package:flutter_timetable_view/src/styles/background_painter.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/views/event_view.dart';
-
+List<TableEventTime> selectedItems = [];
 class LaneView extends StatelessWidget {
   final List<TableEvent> events;
   final TimetableStyle timetableStyle;
@@ -18,7 +18,7 @@ class LaneView extends StatelessWidget {
 
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
-
+  final List<EmptyTimeSlot> _emptySelected = []; // New
    LaneView({
     Key? key,
     required this.events,
@@ -79,10 +79,10 @@ class LaneView extends StatelessWidget {
   ///
 
   _buildEmptyTimeSlots(int laneIndex) {
-    List<_EmptyTimeSlot> emptyTimeSlots = <_EmptyTimeSlot>[];
+    List<EmptyTimeSlot> emptyTimeSlots = <EmptyTimeSlot>[];
 
     for (int i = timetableStyle.startHour; i < timetableStyle.endHour; i++) {
-      emptyTimeSlots.add(_EmptyTimeSlot(
+      emptyTimeSlots.add(EmptyTimeSlot(
         timetableStyle: timetableStyle,
         laneIndex: laneIndex,
         onTap: onEmptyCellTap,
@@ -95,11 +95,12 @@ class LaneView extends StatelessWidget {
       ));
     }
 
+
     return emptyTimeSlots;
   }
 }
 
-class _EmptyTimeSlot extends StatefulWidget {
+class EmptyTimeSlot extends StatefulWidget {
   final TimetableStyle timetableStyle;
   final int laneIndex;
   final TableEventTime start;
@@ -107,7 +108,7 @@ class _EmptyTimeSlot extends StatefulWidget {
   final Function(int laneIndex, TableEventTime start, TableEventTime end) onTap;
   final Function(bool isSelected) onSelectionChanged;
   final bool isMultiSelectEnabled;
-  const _EmptyTimeSlot({
+  const EmptyTimeSlot({
     Key? key,
     required this.laneIndex,
     required this.start,
@@ -119,10 +120,11 @@ class _EmptyTimeSlot extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _EmptyTimeSlotState createState() => _EmptyTimeSlotState();
+  EmptyTimeSlotState createState() => EmptyTimeSlotState();
 }
+// New
+class EmptyTimeSlotState extends State<EmptyTimeSlot> {
 
-class _EmptyTimeSlotState extends State<_EmptyTimeSlot> {
   bool isSelected = false;
 
 
@@ -134,22 +136,32 @@ class _EmptyTimeSlotState extends State<_EmptyTimeSlot> {
       left: 0,
       width: widget.timetableStyle.laneWidth,
       child: GestureDetector(
-        onTap: () {
-          if (widget.isMultiSelectEnabled) {
-            setState(() {
-              isSelected = !isSelected;
-            });
-          }
-          widget.onTap(widget.laneIndex, widget.start, widget.end);
-        },
+          onTap: () {
+            if (widget.isMultiSelectEnabled) {
+              setState(() {
+                isSelected = !isSelected;
+                if (isSelected) {
+                  selectedItems.add(widget.start);
+
+                } else {
+                  selectedItems.remove(widget.start);
+                }
+              });
+            }
+            widget.onTap(widget.laneIndex, widget.start, widget.end);
+          },
         child: Container(
           decoration: BoxDecoration(
               color: isSelected ? Theme.of(context).colorScheme.secondary : Colors.transparent),
           margin: const EdgeInsets.all(1),
           padding: const EdgeInsets.all(1),
         ),
+
       ),
+
     );
+
+
   }
 
   double top() {

@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/lane_events.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
@@ -44,6 +42,7 @@ class _TimetableViewState extends State<TimetableView>
 
   TableEventTime? tappedEmptyCellEndTime;
   bool isSelected = false;
+  final List<EmptyTimeSlot> _emptyTimeSlotStates = []; // New
   @override
   void initState() {
     initController();
@@ -105,21 +104,22 @@ class _TimetableViewState extends State<TimetableView>
               Row(
                 children: widget.laneEventsList.map((laneEvent) {
                   return LaneView(
-  
                     statusColor: widget.statusColor,
-                      events: laneEvent.events,
-                      timetableStyle: widget.timetableStyle,
-                      index: widget.laneEventsList.indexOf(laneEvent),
-                      onEventTap: widget.onEventTap,
-                      onEmptyCellTap: (laneIndex, startTime, endTime) {
-                        print('startTime'+startTime.toString());
-                        setState(() {
-                          isEmptyCellTapped = true;
-                          tappedEmptyCellLaneIndex = laneIndex;
-                          tappedEmptyCellStartTime = startTime;
-                          tappedEmptyCellEndTime = endTime;
-                        });
-                      }, isMultiSelectEnabled: false,);
+                    events: laneEvent.events,
+                    timetableStyle: widget.timetableStyle,
+                    index: widget.laneEventsList.indexOf(laneEvent),
+                    onEventTap: widget.onEventTap,
+                    onEmptyCellTap: (laneIndex, startTime, endTime) {
+                      setState(() {
+                        isEmptyCellTapped = true;
+                        tappedEmptyCellLaneIndex = laneIndex;
+                        tappedEmptyCellStartTime = startTime;
+                        tappedEmptyCellEndTime = endTime;
+                      });
+                      print("Selected items: $selectedItems");
+                    },
+                    isMultiSelectEnabled: true,
+                  );
                 }).toList(),
               ),
               isEmptyCellTapped
@@ -147,6 +147,7 @@ class _TimetableViewState extends State<TimetableView>
       ),
     );
   }
+
 
   _buildEmptyTimeSlot(
       // final TimetableStyle timetableStyle,
