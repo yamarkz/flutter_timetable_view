@@ -18,7 +18,6 @@ class LaneView extends StatelessWidget {
 
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
-  final List<EmptyTimeSlot> _emptySelected = []; // New
    LaneView({
     Key? key,
     required this.events,

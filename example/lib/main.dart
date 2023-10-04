@@ -22,6 +22,9 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: TimetableView(
+        selectedItems: (List<TableEventTime>? TableEventTimeList){
+          print(TableEventTimeList);
+        },
         statusColor: Colors.pink,
         timetableStyle: TimetableStyle(laneWidth: 100,mainBackgroundColor: Colors.black12,),
         laneEventsList: [

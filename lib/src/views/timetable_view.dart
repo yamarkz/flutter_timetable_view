@@ -18,7 +18,7 @@ class TimetableView extends StatefulWidget {
 
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
-
+  Function(List<TableEventTime>? TableEventTimeList)? selectedItems;
   TimetableView({
     Key? key,
     required this.laneEventsList,
@@ -26,6 +26,7 @@ class TimetableView extends StatefulWidget {
     required this.onEmptySlotTap,
     required this.onEventTap,
     required this.statusColor,
+    this.selectedItems,
   })  : super(key: key);
 
   @override
@@ -42,7 +43,7 @@ class _TimetableViewState extends State<TimetableView>
 
   TableEventTime? tappedEmptyCellEndTime;
   bool isSelected = false;
-  final List<EmptyTimeSlot> _emptyTimeSlotStates = []; // New
+
   @override
   void initState() {
     initController();
@@ -116,7 +117,10 @@ class _TimetableViewState extends State<TimetableView>
                         tappedEmptyCellStartTime = startTime;
                         tappedEmptyCellEndTime = endTime;
                       });
-                      print("Selected items: $selectedItems");
+
+                     setState(() {
+                       widget.selectedItems!(selectedItems);
+                     });
                     },
                     isMultiSelectEnabled: true,
                   );
