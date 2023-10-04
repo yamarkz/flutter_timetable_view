@@ -22,6 +22,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: TimetableView(
+        isMultiSelectEnabled: false,
         selectedItems: (List<TableEventTime>? TableEventTimeList){
           print(TableEventTimeList);
         },

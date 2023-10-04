@@ -19,6 +19,7 @@ class TimetableView extends StatefulWidget {
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
   Function(List<TableEventTime>? TableEventTimeList)? selectedItems;
+  bool isMultiSelectEnabled;
   TimetableView({
     Key? key,
     required this.laneEventsList,
@@ -27,6 +28,7 @@ class TimetableView extends StatefulWidget {
     required this.onEventTap,
     required this.statusColor,
     this.selectedItems,
+    required this.isMultiSelectEnabled
   })  : super(key: key);
 
   @override
@@ -122,7 +124,7 @@ class _TimetableViewState extends State<TimetableView>
                        widget.selectedItems!(selectedItems);
                      });
                     },
-                    isMultiSelectEnabled: true,
+                    isMultiSelectEnabled: widget.isMultiSelectEnabled,
                   );
                 }).toList(),
               ),
