@@ -15,7 +15,7 @@ class TimetableView extends StatefulWidget {
   /// Called when an empty slot or cell is tapped must not be null
   final void Function(int laneIndex, TableEventTime start, TableEventTime end)
   onEmptySlotTap;
-
+  final void Function(bool) onLongPressStateChanged;
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
   Function(List<TableEventTime>? TableEventTimeList)? selectedItems;
@@ -28,7 +28,8 @@ class TimetableView extends StatefulWidget {
     required this.onEventTap,
     required this.statusColor,
     this.selectedItems,
-    required this.isMultiSelectEnabled
+    required this.isMultiSelectEnabled,
+    required this.onLongPressStateChanged,
   })  : super(key: key);
 
   @override
@@ -67,6 +68,7 @@ class _TimetableViewState extends State<TimetableView>
         _buildMainContent(context),
         _buildTimelineList(context),
         _buildLaneList(context),
+
       ],
     );
   }
@@ -107,6 +109,7 @@ class _TimetableViewState extends State<TimetableView>
               Row(
                 children: widget.laneEventsList.map((laneEvent) {
                   return LaneView(
+                    onLongPressStateChanged: widget.onLongPressStateChanged,
                     statusColor: widget.statusColor,
                     events: laneEvent.events,
                     timetableStyle: widget.timetableStyle,

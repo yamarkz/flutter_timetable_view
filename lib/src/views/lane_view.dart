@@ -12,6 +12,7 @@ class LaneView extends StatelessWidget {
   /// Index is used to uniquely identify each lane
   final int index;
   final bool isMultiSelectEnabled;
+  final void Function(bool) onLongPressStateChanged;
 
   final Function(int laneIndex, TableEventTime start, TableEventTime end)
   onEmptyCellTap;
@@ -27,6 +28,7 @@ class LaneView extends StatelessWidget {
     required this.onEventTap,
     required this.statusColor,
      required this.isMultiSelectEnabled,
+     required this.onLongPressStateChanged,
   })  : super(key: key);
 
   @override
@@ -85,10 +87,10 @@ class LaneView extends StatelessWidget {
         timetableStyle: timetableStyle,
         laneIndex: laneIndex,
         onTap: onEmptyCellTap,
-        isMultiSelectEnabled: isMultiSelectEnabled,
         onSelectionChanged: (isSelected) {
         //  isSelected = Widget.isSelected;
         },
+        onLongPressStateChanged: onLongPressStateChanged,
         start: TableEventTime(hour: i, minute: 0),
         end: TableEventTime(hour: i + 1, minute: 0),
       ));
@@ -106,8 +108,8 @@ class EmptyTimeSlot extends StatefulWidget {
   final TableEventTime end;
   final Function(int laneIndex, TableEventTime start, TableEventTime end) onTap;
   final Function(bool isSelected) onSelectionChanged;
-  final bool isMultiSelectEnabled;
-  const EmptyTimeSlot({
+  final void Function(bool) onLongPressStateChanged;
+   EmptyTimeSlot({
     Key? key,
     required this.laneIndex,
     required this.start,
@@ -115,53 +117,70 @@ class EmptyTimeSlot extends StatefulWidget {
     required this.onTap,
     required this.onSelectionChanged,
     required this.timetableStyle,
-    required this.isMultiSelectEnabled,
+     required this.onLongPressStateChanged,
   }) : super(key: key);
 
   @override
   EmptyTimeSlotState createState() => EmptyTimeSlotState();
 }
+bool isMultiSelectEnabled = false;
+
 // New
 class EmptyTimeSlotState extends State<EmptyTimeSlot> {
-
   bool isSelected = false;
+  bool showLongPressMessage = false;
+  void toggleSelection() {
+    setState(() {
+      isSelected = !isSelected;
+      if (isSelected) {
+        selectedItems.add(widget.start);
+      } else {
+        selectedItems.remove(widget.start);
+      }
+    });
+  }
 
 
-  @override
+
+
   Widget build(BuildContext context) {
     return Positioned(
       top: top(),
       height: height(),
       left: 0,
       width: widget.timetableStyle.laneWidth,
-      child: GestureDetector(
-          onTap: () {
-            if (widget.isMultiSelectEnabled) {
+      child: Stack(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {
+              if (isMultiSelectEnabled) {
+                toggleSelection();
+              }
+              widget.onTap(widget.laneIndex, widget.start, widget.end);
+            },
+            onLongPress: () {
               setState(() {
-                isSelected = !isSelected;
-                if (isSelected) {
-                  selectedItems.add(widget.start);
-
-                } else {
-                  selectedItems.remove(widget.start);
-                }
+                isMultiSelectEnabled = true;
+                showLongPressMessage = true;
               });
-            }
-            widget.onTap(widget.laneIndex, widget.start, widget.end);
-          },
-        child: Container(
-          decoration: BoxDecoration(
-              color: isSelected ? Theme.of(context).colorScheme.secondary : Colors.transparent),
-          margin: const EdgeInsets.all(1),
-          padding: const EdgeInsets.all(1),
-        ),
+              widget.onLongPressStateChanged(showLongPressMessage);
+              toggleSelection();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  color: isSelected
+                      ? Theme.of(context).colorScheme.secondary
+                      : Colors.transparent),
+              margin: const EdgeInsets.all(1),
+              padding: const EdgeInsets.all(1),
+            ),
+          ),
 
+        ],
       ),
-
     );
-
-
   }
+
 
   double top() {
     return calculateTopOffset(

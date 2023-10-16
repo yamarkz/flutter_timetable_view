@@ -16,15 +16,77 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+
+Widget buildConfirmationBar(VoidCallback clearSelected) {
+  return     Container(
+    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+    decoration: BoxDecoration(
+      color: Colors.blue, // Change to your preferred color
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text('نهایی کردن انتخاب'),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            GestureDetector(
+              onTap:()=> clearSelected(),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                color: Colors.red,
+                child: Text('انصراف', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              color: Colors.green,
+              child: Text('تاكيد', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+bool showLongPressMessage = false;
+List<TableEventTime>? selectedItems;
+
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  void clearSelectedItems() {
+    print("selectedItems before  "+selectedItems.toString());
+    setState(() {
+      selectedItems?.clear();
+    });
+    print("selectedItems after clean "+selectedItems.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: showLongPressMessage ? buildConfirmationBar(clearSelectedItems) : SizedBox(),
       appBar: AppBar(),
       body: TimetableView(
         isMultiSelectEnabled: false,
-        selectedItems: (List<TableEventTime>? TableEventTimeList){
-          print(TableEventTimeList);
+        selectedItems: (List<TableEventTime>? selectedList) {
+          setState(() {
+            selectedItems = selectedList;
+          });
+        },
+        onLongPressStateChanged: (isLongPressed) {
+          showLongPressMessage=isLongPressed;
+          setState(() {
+
+          });
+          print('onLongPressStateChanged');
         },
         statusColor: Colors.pink,
         timetableStyle: TimetableStyle(laneWidth: 100,mainBackgroundColor: Colors.black12,),
@@ -127,7 +189,10 @@ class MyHomePage extends StatelessWidget {
 
         ],
         onEmptySlotTap:
-            (int laneIndex, TableEventTime start, TableEventTime end) {},
+            (int laneIndex, TableEventTime start, TableEventTime end) {
+
+
+            },
         onEventTap: (TableEvent event) {},
       ),
     );
