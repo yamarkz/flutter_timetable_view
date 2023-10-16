@@ -5,7 +5,6 @@ import 'package:flutter_timetable_view/src/models/table_event_time.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/utils/utils.dart';
 import 'package:flutter_timetable_view/src/views/controller/timetable_view_controller.dart';
-import 'package:flutter_timetable_view/src/views/diagonal_scroll_view.dart';
 import 'package:flutter_timetable_view/src/views/lane_view.dart';
 
 class TimetableView extends StatefulWidget {
@@ -61,15 +60,18 @@ class _TimetableViewState extends State<TimetableView>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-
-        _buildCorner(),
-        _buildMainContent(context),
-        _buildTimelineList(context),
-        _buildLaneList(context),
-
-      ],
+    return SingleChildScrollView(
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Stack(
+          children: <Widget>[
+            _buildCorner(),
+            _buildMainContent(context),
+            _buildTimelineList(context),
+            _buildLaneList(context),
+          ],
+        ),
+      ),
     );
   }
 
@@ -94,64 +96,54 @@ class _TimetableViewState extends State<TimetableView>
         left: widget.timetableStyle.timeItemWidth,
         top: widget.timetableStyle.laneHeight,
       ),
-      child: DiagonalScrollView(
-        horizontalPixelsStreamController: horizontalPixelsStream,
-        verticalPixelsStreamController: verticalPixelsStream,
-        onScroll: onScroll,
-        maxWidth:
-        widget.laneEventsList.length * widget.timetableStyle.laneWidth,
-        maxHeight:
-        (widget.timetableStyle.endHour - widget.timetableStyle.startHour) *
-            widget.timetableStyle.timeItemHeight,
-        child: IntrinsicHeight(
-          child: Stack(
-            children: [
-              Row(
-                children: widget.laneEventsList.map((laneEvent) {
-                  return LaneView(
-                    onLongPressStateChanged: widget.onLongPressStateChanged,
-                    statusColor: widget.statusColor,
-                    events: laneEvent.events,
-                    timetableStyle: widget.timetableStyle,
-                    index: widget.laneEventsList.indexOf(laneEvent),
-                    onEventTap: widget.onEventTap,
-                    onEmptyCellTap: (laneIndex, startTime, endTime) {
-                      setState(() {
-                        isEmptyCellTapped = true;
-                        tappedEmptyCellLaneIndex = laneIndex;
-                        tappedEmptyCellStartTime = startTime;
-                        tappedEmptyCellEndTime = endTime;
-                      });
+      child: IntrinsicHeight(
+        child: Stack(
+          children: [
+            Row(
+              children: widget.laneEventsList.map((laneEvent) {
+                return LaneView(
+                  onLongPressStateChanged: widget.onLongPressStateChanged,
+                  statusColor: widget.statusColor,
+                  events: laneEvent.events,
+                  timetableStyle: widget.timetableStyle,
+                  index: widget.laneEventsList.indexOf(laneEvent),
+                  onEventTap: widget.onEventTap,
+                  onEmptyCellTap: (laneIndex, startTime, endTime) {
+                    setState(() {
+                      isEmptyCellTapped = true;
+                      tappedEmptyCellLaneIndex = laneIndex;
+                      tappedEmptyCellStartTime = startTime;
+                      tappedEmptyCellEndTime = endTime;
+                    });
 
-                     setState(() {
-                       widget.selectedItems!(selectedItems);
-                     });
-                    },
-                    isMultiSelectEnabled: widget.isMultiSelectEnabled,
-                  );
-                }).toList(),
-              ),
-              isEmptyCellTapped
-                  ? _buildEmptyTimeSlot(
-                tappedEmptyCellLaneIndex,
-                tappedEmptyCellStartTime!,
-                tappedEmptyCellEndTime!,
+                   setState(() {
+                     widget.selectedItems!(selectedItems);
+                   });
+                  },
+                  isMultiSelectEnabled: widget.isMultiSelectEnabled,
+                );
+              }).toList(),
+            ),
+            isEmptyCellTapped
+                ? _buildEmptyTimeSlot(
+              tappedEmptyCellLaneIndex,
+              tappedEmptyCellStartTime!,
+              tappedEmptyCellEndTime!,
 
-              )
-              // EmptyTimeSlot(
-              //   widget.timetableStyle,
-              //         dayOfWeek: tappedEmptyCellDayOfWeek,
-              //         laneIndex: tappedEmptyCellLaneIndex,
-              //         start: tappedEmptyCellStartTime,
-              //         end: tappedEmptyCellEndTime,
-              //         onTap: widget.onEmptySlotTap,
-              //       )
-                  : SizedBox(
-                height: 0,
-                width: 0,
-              )
-            ],
-          ),
+            )
+            // EmptyTimeSlot(
+            //   widget.timetableStyle,
+            //         dayOfWeek: tappedEmptyCellDayOfWeek,
+            //         laneIndex: tappedEmptyCellLaneIndex,
+            //         start: tappedEmptyCellStartTime,
+            //         end: tappedEmptyCellEndTime,
+            //         onTap: widget.onEmptySlotTap,
+            //       )
+                : SizedBox(
+              height: 0,
+              width: 0,
+            )
+          ],
         ),
       ),
     );
