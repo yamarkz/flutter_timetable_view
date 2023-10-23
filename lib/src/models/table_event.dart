@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event_time.dart';
 
 
-class TableEvent {
+class TableEvent extends Equatable{
   final String title;
 
   /// Id to uniquely identify event. Used mainly in callbacks
@@ -21,6 +22,7 @@ class TableEvent {
   final EdgeInsets padding;
 
   final EdgeInsets margin;
+
 
   // //Todo:: Determine if Event ID needs to be passed to callback
   // final void Function(
@@ -52,7 +54,20 @@ class TableEvent {
     this.backgroundColor= const Color(0xCC2196F3),
     this.textStyle= const TextStyle(color: Colors.white),
   }) : assert(endTime.isAfter(startTime));
-
+  @override
+  List<Object?> get props => [
+    title,
+    eventId,
+    laneIndex,
+    price,
+    startTime,
+    endTime,
+    padding,
+    margin,
+    decoration,
+    backgroundColor,
+    textStyle,
+  ];
 }
 
 

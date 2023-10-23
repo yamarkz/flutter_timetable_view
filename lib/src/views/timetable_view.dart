@@ -6,30 +6,31 @@ import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/utils/utils.dart';
 import 'package:flutter_timetable_view/src/views/controller/timetable_view_controller.dart';
 import 'package:flutter_timetable_view/src/views/lane_view.dart';
+import 'package:uuid/uuid.dart';
 
 class TimetableView extends StatefulWidget {
   final List<LaneEvents> laneEventsList;
   final TimetableStyle timetableStyle;
   final Color statusColor;
+
   /// Called when an empty slot or cell is tapped must not be null
   final void Function(int laneIndex, TableEventTime start, TableEventTime end)
-  onEmptySlotTap;
+      onEmptySlotTap;
   final void Function(bool) onLongPressStateChanged;
+
   /// Called when an event is tapped
   final void Function(TableEvent event) onEventTap;
-  Function(List<TableEventTime>? TableEventTimeList)? selectedItems;
-  bool isMultiSelectEnabled;
+  final void Function(List<TableEvent> TableEventList) onTableEventList;
   TimetableView({
     Key? key,
     required this.laneEventsList,
-    this.timetableStyle= const TimetableStyle(),
+    this.timetableStyle = const TimetableStyle(),
     required this.onEmptySlotTap,
     required this.onEventTap,
     required this.statusColor,
-    this.selectedItems,
-    required this.isMultiSelectEnabled,
     required this.onLongPressStateChanged,
-  })  : super(key: key);
+    required this.onTableEventList,
+  }) : super(key: key);
 
   @override
   _TimetableViewState createState() => _TimetableViewState();
@@ -44,7 +45,6 @@ class _TimetableViewState extends State<TimetableView>
   TableEventTime? tappedEmptyCellStartTime;
 
   TableEventTime? tappedEmptyCellEndTime;
-  bool isSelected = false;
 
   @override
   void initState() {
@@ -107,7 +107,9 @@ class _TimetableViewState extends State<TimetableView>
                   events: laneEvent.events,
                   timetableStyle: widget.timetableStyle,
                   index: widget.laneEventsList.indexOf(laneEvent),
-                  onEventTap: widget.onEventTap,
+                  onEventTap: (TableEvent event){
+
+                  },
                   onEmptyCellTap: (laneIndex, startTime, endTime) {
                     setState(() {
                       isEmptyCellTapped = true;
@@ -116,57 +118,63 @@ class _TimetableViewState extends State<TimetableView>
                       tappedEmptyCellEndTime = endTime;
                     });
 
-                   setState(() {
-                     widget.selectedItems!(selectedItems);
-                   });
-                  },
-                  isMultiSelectEnabled: widget.isMultiSelectEnabled,
+                  }, onTableEventList: (List<TableEvent> TableEventList) {
+                  widget.onTableEventList(TableEventList);
+                }
                 );
               }).toList(),
             ),
             isEmptyCellTapped
                 ? _buildEmptyTimeSlot(
-              tappedEmptyCellLaneIndex,
-              tappedEmptyCellStartTime!,
-              tappedEmptyCellEndTime!,
-
-            )
-            // EmptyTimeSlot(
-            //   widget.timetableStyle,
-            //         dayOfWeek: tappedEmptyCellDayOfWeek,
-            //         laneIndex: tappedEmptyCellLaneIndex,
-            //         start: tappedEmptyCellStartTime,
-            //         end: tappedEmptyCellEndTime,
-            //         onTap: widget.onEmptySlotTap,
-            //       )
+                    tappedEmptyCellLaneIndex,
+                    tappedEmptyCellStartTime!,
+                    tappedEmptyCellEndTime!,
+                  )
+                // EmptyTimeSlot(
+                //   widget.timetableStyle,
+                //         dayOfWeek: tappedEmptyCellDayOfWeek,
+                //         laneIndex: tappedEmptyCellLaneIndex,
+                //         start: tappedEmptyCellStartTime,
+                //         end: tappedEmptyCellEndTime,
+                //         onTap: widget.onEmptySlotTap,
+                //       )
                 : SizedBox(
-              height: 0,
-              width: 0,
-            )
+                    height: 0,
+                    width: 0,
+                  ),
+
+            // Align(
+            //   alignment: Alignment.bottomRight,
+            //   child: FloatingActionButton(
+            //     onPressed: () {
+            //       // Handle FAB press
+            //     },
+            //     child: Icon(Icons.add),
+            //   ),
+            // ),
           ],
         ),
       ),
     );
   }
 
-
   _buildEmptyTimeSlot(
-      // final TimetableStyle timetableStyle,
-      final int laneIndex,
-      final TableEventTime start,
-      final TableEventTime end,
-      ) {
+    // final TimetableStyle timetableStyle,
+    final int laneIndex,
+    final TableEventTime start,
+    final TableEventTime end,
+  ) {
     double calculateTopOffset(
-        int hour, [
-          int minute = 0,
-          double? hourRowHeight,
-        ]) {
+      int hour, [
+      int minute = 0,
+      double? hourRowHeight,
+    ]) {
       return (hour + (minute / 60)) * (hourRowHeight ?? 60);
     }
 
     double top() {
       return calculateTopOffset(
-          start.hour, start.minute, widget.timetableStyle.timeItemHeight) -
+              start.hour, start.minute, widget.timetableStyle.timeItemHeight) -
           (widget.timetableStyle.startHour *
               widget.timetableStyle.timeItemHeight);
     }
@@ -191,7 +199,8 @@ class _TimetableViewState extends State<TimetableView>
         child: Opacity(
           opacity: 0.5,
           child: Container(
-            decoration: BoxDecoration(color: Theme.of(context).colorScheme.secondary),
+            decoration:
+                BoxDecoration(color: Theme.of(context).colorScheme.secondary),
             margin: const EdgeInsets.all(1),
             padding: const EdgeInsets.all(1),
             child: Icon(
@@ -218,8 +227,8 @@ class _TimetableViewState extends State<TimetableView>
         shrinkWrap: true,
         children: [
           for (var i = widget.timetableStyle.startHour;
-          i < widget.timetableStyle.endHour;
-          i += 1)
+              i < widget.timetableStyle.endHour;
+              i += 1)
             i
         ].map((hour) {
           return Container(
@@ -286,4 +295,3 @@ class _TimetableViewState extends State<TimetableView>
     );
   }
 }
-
