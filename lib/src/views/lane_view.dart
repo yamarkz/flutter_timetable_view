@@ -4,7 +4,6 @@ import 'package:flutter_timetable_view/src/models/table_event_time.dart';
 import 'package:flutter_timetable_view/src/styles/background_painter.dart';
 import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/views/event_view.dart';
-import 'package:uuid/uuid.dart';
 
 bool isMultiSelectEnabled = false;
 

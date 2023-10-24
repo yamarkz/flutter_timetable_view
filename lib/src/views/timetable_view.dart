@@ -6,7 +6,7 @@ import 'package:flutter_timetable_view/src/styles/timetable_style.dart';
 import 'package:flutter_timetable_view/src/utils/utils.dart';
 import 'package:flutter_timetable_view/src/views/controller/timetable_view_controller.dart';
 import 'package:flutter_timetable_view/src/views/lane_view.dart';
-import 'package:uuid/uuid.dart';
+
 
 class TimetableView extends StatefulWidget {
   final List<LaneEvents> laneEventsList;

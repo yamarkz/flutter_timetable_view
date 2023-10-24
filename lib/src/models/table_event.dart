@@ -1,9 +1,9 @@
-import 'package:equatable/equatable.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event_time.dart';
 
 
-class TableEvent extends Equatable{
+class TableEvent {
   final String title;
 
   /// Id to uniquely identify event. Used mainly in callbacks
