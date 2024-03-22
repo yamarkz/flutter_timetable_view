@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_timetable_view/src/models/table_event.dart';
 
+
 class Utils {
   static bool sameDay(DateTime date, [DateTime? target]) {
     target = target ?? DateTime.now();
@@ -28,50 +29,57 @@ class Utils {
         _addLeadingZero(day);
   }
 
-  static String hourFormatter(int hour, int minute) {
+  static String formatHourInto24Hours(int hour, int minute) {
     return _addLeadingZero(hour) + ':' + _addLeadingZero(minute);
   }
 
-  static Widget eventText(
-    TableEvent event,
-    BuildContext context,
-    double height,
-    double width,
-  ) {
-    List<TextSpan> text = [
-      TextSpan(
-        text: event.title,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      TextSpan(
-        text: ' ' +
-            Utils.hourFormatter(event.start.hour, event.start.minute) +
-            ' - ' +
-            Utils.hourFormatter(event.end.hour, event.end.minute) +
-            '\n\n',
-      ),
-    ];
+  static String hourFormatter(int hour, int minute, bool showAsAMPM) {
+    if (showAsAMPM) {
+      return formatHourIntoAmPM(hour, minute);
+    } else {
+      return formatHourInto24Hours(hour, minute);
+    }
+  }
 
-    bool? exceedHeight;
-    while (exceedHeight ?? true) {
-      exceedHeight = _exceedHeight(text, event.textStyle, height, width);
-      if (exceedHeight == null || !exceedHeight) {
-        if (exceedHeight == null) {
-          text.clear();
-        }
-        break;
-      }
+  static String formatHourIntoAmPM(int hour, int minute) {
+    String formattedString = '';
 
-      if (!_ellipsize(text)) {
-        break;
-      }
+    // convert 0 Am to 12 Am
+    if (hour == 0) {
+      formattedString = "12";
+    } else {
+      formattedString = hour > 12 ? (hour - 12).toString() : hour.toString();
     }
 
-    return RichText(
-      text: TextSpan(
-        children: text,
-        style: event.textStyle,
-      ),
+    // if minute is 0, just display time as 12 Am, or 2 PM
+    if (minute > 0) {
+      formattedString += ":" + _addLeadingZero(minute);
+    }
+
+    formattedString += " ${hour >= 12 ? "PM" : "AM"}";
+
+    return formattedString;
+  }
+
+  static Widget eventText(
+      TableEvent event,
+      BuildContext context,
+      double height,
+      double width,
+      ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center, // aligns text to the left
+      children: [
+        Text(
+          event.title,
+          style: TextStyle(fontWeight: event.titleTextStyle.fontWeight,fontSize: event.titleTextStyle.fontSize,color: event.titleTextStyle.color),
+        ),
+        SizedBox(height: 5,),
+        Text(
+          event.price,
+          style: TextStyle(fontWeight: event.priceTextStyle.fontWeight,fontSize: event.priceTextStyle.fontSize,color: event.priceTextStyle.color),
+        ),
+      ],
     );
   }
 
@@ -133,3 +141,4 @@ class Utils {
     return true;
   }
 }
+

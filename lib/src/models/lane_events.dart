@@ -12,3 +12,4 @@ class LaneEvents {
     required this.events,
   });
 }
+
